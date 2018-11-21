@@ -11,7 +11,7 @@ PROJECT_METADATA = {
     "Entities" are understood as "real world concepts" like places, persons, organizations\
     events, ... . Entities have a unique identifier, can (most of the time) be localized in time\
     and space and can be related to each other.',
-    'github': 'https://github.com/konde-at/veh',
+    'github': 'https://github.com/acdh-oeaw/veh',
     'purpose_de': 'Ziel von VEH ist die Publikation von Forschungsdaten.',
     'purpose_en': 'The purpose of VEH is the publication of research data.',
     'version': '0.0.1',
