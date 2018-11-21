@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="seh.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>A sample Person List</title>
+         </titleStmt>
+         <publicationStmt>
+            <publisher></publisher>
+         </publicationStmt>
+         <sourceDesc>
+            <bibl>OH MY GOOD TEI!!!!</bibl>
+         </sourceDesc>
+      </fileDesc>
+  </teiHeader>
+  <text>
+      <body>
+         <listPerson>
+            <person xml:id="A002072" type="non_fictional">
+               <persName>
+                  <surname>Davis</surname>
+                  <forename>Gustav</forename>
+                  <roleName>Graf</roleName>
+                  <nameLink>von</nameLink>
+               </persName>
+               <persName type="alt">
+                  <surname>Davis</surname>
+                  <forename>Gustaf</forename>
+                  <roleName>Freiher</roleName>
+                  <nameLink>von und zu</nameLink>
+               </persName>
+               <persName type="alt">
+                  <surname>Daviss</surname>
+                  <roleName>Freiher</roleName>
+               </persName>
+               <sex>m</sex>
+               <birth when-iso="1856-01-01">
+                  <date>1856</date>
+                   <placeName>Bratislava</placeName>
+               </birth>
+               <death when-iso="1951-01-01">
+                  <date>1951</date>
+                  <placeName>Waidhofen an der Ybbs</placeName>
+               </death>
+               <occupation ref="vocabs.acdh.oeaw.ac.at/oebl-professions/IDyxz">Journalist</occupation>
+               <occupation>Herausgeber</occupation>
+               <idno type="URL" subtype="GND">http://d-nb.info/gnd/118562193</idno>
+               <idno type="HBAS">A002072</idno>
+            </person>
+            <person type="non_fictional">
+               <persName>
+                  <forename>Aristotoeles</forename>
+               </persName>
+               <idno type="URL" subtype="GND">http://d-nb.info/gnd/118650130</idno>
+               <idno type="URL" subtype="VIAF">https://viaf.org/viaf/7524651</idno>
+               <idno type="STB">123547</idno>
+            </person>
+            <person type="non_fictional">
+               <persName>
+                  <surname>NoForename</surname>
+               </persName>
+               <idno type="CPAS">123547</idno>
+            </person>
+            <person type="non_fictional">
+               <persName>
+                  <surname>Suttner</surname>
+                  <forename>Bertha</forename>
+                  <nameLink>von</nameLink>
+               </persName>
+               <persName type="alt">
+                  <surname>SuttnerAlt</surname>
+               </persName>
+               <persName type="alt"></persName>
+               <sex>f</sex>
+               <birth when-iso="01-01-1843">
+                  <date>1843</date>
+                  <placeName>Prag</placeName>
+               </birth>
+               <death when-iso="1914-06-21">
+                  <placeName>Wien</placeName>
+               </death>
+            </person>
+            <person type="non_fictional">
+               <persName>
+                  <forename>Paul</forename>
+                  <surname>Mongré</surname>
+               </persName>
+               <persName type="altName" subtype="birthName">
+                  <forename>Felix</forename>
+                  <surname>Hausdorff</surname>
+               </persName>
+               <birth when-iso="1868-01-01">
+                  <date>1868</date>
+                  <placeName>Breslau/Wrocłav</placeName>
+               </birth>
+               <death when-iso="1942-01-01">
+                  <date>1942</date>
+                  <placeName>Bonn</placeName>
+               </death>
+               <occupation>Schriftsteller</occupation>
+               <occupation>Mathematiker</occupation>
+               <!--Pseudonym von Hausdorff-->
+               <idno type="HBAS">A003255</idno>
+            </person>
+            <person type="non_fictional">
+               <persName>
+                  <forename>Maria</forename>
+                  <surname>Dörmann</surname>
+               </persName>
+               <persName type="altName" subtype="birthName">
+                  <forename>Maria</forename>
+                  <surname>Littitz von Bubna</surname>
+               </persName>
+               <persName type="altName" subtype="married">
+                  <forename>Maria</forename>
+                  <surname>Jürgens</surname>
+               </persName>
+               <birth when-iso="1877-01-01">
+                  <date>1877</date>
+                  <placeName>Kiritein/Křtiny</placeName>
+               </birth>
+               <death when-iso="1923-01-01">
+                  <date>1923</date>
+                  <placeName>Wien</placeName>
+               </death>
+               <occupation>Schauspielerin</occupation>
+               <occupation>Fotografin</occupation>
+               <idno type="HBAS">A003226</idno>
+            </person>
+         </listPerson>
+      </body>
+  </text>
+</TEI>

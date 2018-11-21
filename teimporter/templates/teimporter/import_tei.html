@@ -1,0 +1,30 @@
+{% extends "webpage/base.html" %}
+{% block Titel %} Import TEI {% endblock %}
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<div class="container">
+<div class="panel panel-default procustom-panel-create">
+    <div class="panel-heading procustom-panel-heading">
+            <h1 style="text-align: center;">Process a single TEI document</h1>
+        </div>
+        <div class="panel-body">
+            <br>
+            {% crispy form %}
+        </div>
+        <div class="row">
+            <h2>{{ hansi }}</h2>
+            <h3>{{ enrich }}</h3>
+            <div class="col-md-6">
+                <h1>Tei with added ids</h1>
+                <pre>{{ processd_file }}</pre>
+            </div>
+            <div class="col-md-6">
+                <h1>Generated Place List</h1>
+                <pre>{{ place_list }}</pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

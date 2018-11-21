@@ -1,0 +1,90 @@
+{% extends "webpage/base.html" %}
+{% block title %} Import listperson.xml {% endblock %}
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<div class="container">
+<div class="panel panel-default procustom-panel-create">
+    <div class="panel-heading procustom-panel-heading">
+            <h1 style="text-align: center;">Process tei:personList</h1>
+        </div>
+        <div class="panel-body">
+            <br>
+            {% crispy form %}
+        </div>
+        {% if metadata %}
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>created metadata</h1>
+                     <table class="table table-bordered">
+                         <tr>
+                             <th>
+                                 counter
+                             </th>
+                             <td>
+                                 {{ counter }}
+                             </td>
+                         </tr>
+                         <tr>
+                             <th>
+                                 user
+                             </th>
+                             <td>
+                                 {{ metadata.user }}
+                             </td>
+                         </tr>
+                         <tr>
+                             <th>
+                                 collection
+                             </th>
+                             <td>
+                                 {{ metadata.col }}
+                             </td>
+                         </tr>
+                         <tr>
+                             <th>
+                                 source
+                             </th>
+                             <td>
+                                 {{ metadata.src }}
+                             </td>
+                         </tr>
+                         <tr>
+                             <th>
+                                 text
+                             </th>
+                             <td>
+                                 {{ metadata.text }}
+                             </td>
+                         </tr>
+                         <tr>
+                             <th>
+                                 file
+                             </th>
+                             <td>
+                                 {{ metadata.file|truncatechars:25 }}
+                             </td>
+                         </tr>
+                     </table>
+                </div>
+                <div class="col-md-6">
+                    <h1>status</h1>
+                    <h2>new</h2>
+                    {% for x in created.new %}
+                        <li>
+                            <a href="{{x.get_absolut_uri }}">{{ x }}</a>
+                        </li>
+                    {% endfor %}
+                    <h2>updated</h2>
+                    {% for x in created.updated %}
+                        <li>
+                            <a href="{{x.get_absolut_uri }}">{{ x }}</a>
+                        </li>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

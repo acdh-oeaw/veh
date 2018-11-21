@@ -1,0 +1,10 @@
+{% extends "entities/generic_list.html" %}
+{% block Titel %}See all Persons{% endblock %}
+{% block list_title %}All Places{% endblock %}
+{% block create_button %}
+{% load django_tables2 %}
+        <div>
+            {# <a class="btn btn-primary btn-lg" href="{% url 'entities:person_create' %}">create new ahhhh</a>#}
+            <a class="btn btn-primary btn-lg" href="{% url 'teimporter:place_list_as_tei' %}{% querystring  %}">export as tei:listPlace</a>
+        </div>
+{% endblock %}

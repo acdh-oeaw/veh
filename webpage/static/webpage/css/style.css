@@ -1,0 +1,14 @@
+.card {
+    overflow: visible;
+    margin-bottom: 20px;
+}
+
+a {
+    color: #88dbdf;
+}
+.help-block {
+	font-size: 0.9em;
+}
+.create-label {
+	font-weight: 700;
+}
