@@ -40,3 +40,5 @@ dev_secret.py
 /apis_core_hansi
 /staticfiles
 /veh/settings/pg_local.py
+/dump.sql
+/apis_core
