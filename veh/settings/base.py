@@ -185,7 +185,10 @@ APIS_ENTITIES = {
     'Institution': {'search': ['name'],
                     'list_filters': [('name', {'method': 'wildcard_filter', 'label': 'Name'})]},
     'Work': {'search': ['name'],
-             'list_filters': [('name', {'method': 'wildcard_filter', 'label': 'Name'})]},
+             'list_filters': [
+                ('name', {'method': 'wildcard_filter', 'label': 'Name'}),
+                ('collection', {'label': 'Collection'}),
+            ]},
     'Event': {'search': ['name'],
               'list_filters': [('name', {'method': 'wildcard_filter', 'label': 'Name'})]},
 }
