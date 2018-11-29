@@ -167,7 +167,10 @@ APIS_ALTERNATE_NAMES = [
 
 APIS_ENTITIES = {
     'Place': {'search': ['name'],
-              'list_filters': [('name', {'method': 'wildcard_filter', 'label': 'Name'})]},
+              'list_filters': [
+                ('name', {'method': 'wildcard_filter', 'label': 'Name'}),
+                ('collection', {'label': 'Collection'})
+            ]},
     'Person': {'search': ['name', 'first_name'],
                'form_order': ['first_name', 'name'],
                'table_fields': ['name', 'first_name', 'start_date', 'end_date', 'profession'],
@@ -227,5 +230,13 @@ PROJECTS = {
             'resolver_person': 'pages/person-detail.html?personID=',
             'resolver_place': 'pages/place-detail.html?placeID=',
             'base_url': 'https://brenner.acdh.oeaw.ac.at',
+        },
+    'ASBW':
+        {
+            'abbr': 'ASBW',
+            'title': 'Arthur Schnitzler Briefwechsel mit Autorinnen und Autoren',
+            'resolver_person': 'register.html?key=',
+            'resolver_place': 'register.html?key=',
+            'base_url': 'https://schnitzler-briefe.acdh.oeaw.ac.at'
         },
 }

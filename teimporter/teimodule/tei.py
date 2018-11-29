@@ -210,7 +210,7 @@ class TeiPlaceList(TeiReader):
         """
 
         place = {'xml:id': placeelement.xpath('./@xml:id', namespaces=self.ns_xml)}
-        place['type'] = placeelement.xpath('./type')
+        place['type'] = placeelement.xpath('./@type')
         place['placeNames'] = []
         place['idno'] = []
         for x in placeelement.xpath('.//tei:placeName', namespaces=self.ns_tei):
@@ -225,8 +225,29 @@ class TeiPlaceList(TeiReader):
             idno = {}
             idno['text'] = " ".join((x.xpath('.//text()')))
             idno['type'] = x.xpath('./@type')
+            if x.xpath('./@subtype'):
+                idno['subtype'] = x.xpath('./@subtype')
             place['idno'].append(idno)
+        belongs_to = {}
+        try:
+            belongs_to['node'] = placeelement.xpath(
+                './/tei:belongsTo', namespaces=self.ns_tei
+            )[0]
+            place['belongs_to'] = belongs_to
+        except IndexError:
+            belongs_to = None
+        if belongs_to:
+            belongs_to['active'] = belongs_to['node'].xpath(
+                './@active'
+            )[0]
+            belongs_to['passive'] = belongs_to['node'].xpath(
+                './@passive'
+            )[0]
+            place['belongs_to'] = belongs_to
         geo = {}
+        place['legacy_id'] = placeelement.xpath(
+            './tei:idno[@type="ASBW"]/text()', namespaces=self.ns_tei
+        )[0]
         try:
             geo['coordinates'] = placeelement.xpath(
                 './/tei:geo/text()',
