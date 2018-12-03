@@ -152,8 +152,8 @@ APIS_COMPONENTS = []
 # APIS settings
 
 APIS_TEI_TEXTS = ['xml/tei transcription']
-APIS_CETEICEAN_CSS = "http://teic.github.io/CETEIcean/css/CETEIcean.css"
-APIS_CETEICEAN_JS = "http://teic.github.io/CETEIcean/js/CETEI.js"
+APIS_CETEICEAN_CSS = "https://teic.github.io/CETEIcean/css/CETEIcean.css"
+APIS_CETEICEAN_JS = "https://teic.github.io/CETEIcean/js/CETEI.js"
 
 APIS_NEXT_PREV = True
 
