@@ -42,3 +42,6 @@ dev_secret.py
 /veh/settings/pg_local.py
 /dump.sql
 /apis_core
+
+cpas_persons.csv
+perslist_joins*

@@ -246,4 +246,12 @@ PROJECTS = {
             'resolver_place': 'register.html?key=',
             'base_url': 'https://schnitzler-briefe.acdh.oeaw.ac.at'
         },
+    'CPAS':
+        {
+            'abbr': 'CPAS',
+            'title': 'A. ist manchmal wie ein kleines Kind',
+            'resolver_person': 'register.html?key=',
+            'resolver_place': 'register.html?key=',
+            'base_url': 'https://schnitzler-kino.acdh.oeaw.ac.at'
+        },
 }

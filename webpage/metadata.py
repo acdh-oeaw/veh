@@ -21,5 +21,6 @@ PROJECT_METADATA = {
     'social_media': [
         ('fab fa-twitter', 'https://twitter.com/ACDH_OeAW'),
         ('fab fa-youtube', 'https://www.youtube.com/channel/UCgaEMaMbPkULYRI5u6gvG-w'),
-    ]
+    ],
+    'app_type': 'database',
 }
