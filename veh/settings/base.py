@@ -41,15 +41,17 @@ INSTALLED_APPS = [
     'apis_core.apis_relations',
     'apis_core.apis_vocabularies',
     'apis_core.apis_labels',
+    'apis_core.apis_vis',
     'rest_framework.authtoken',
     'guardian',
     'charts',
-    'teimporter',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"
 
 REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 50,
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticatedOrReadOnly',),
 }
 
@@ -84,8 +86,11 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'webpage.webpage_content_processors.installed_apps',
                 'webpage.webpage_content_processors.is_dev_version',
+                'webpage.webpage_content_processors.get_db_name',
                 'apis_core.context_processors.custom_context_processors.add_entities',
                 'apis_core.context_processors.custom_context_processors.add_relations',
+                'apis_core.context_processors.custom_context_processors.add_apis_settings',
+
             ],
         },
     },
@@ -135,19 +140,6 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
 
-ARCHE_SETTINGS = {
-    'project_name': ROOT_URLCONF.split('.')[0],
-    'base_url': "https://id.acdh.oeaw.ac.at/{}".format(ROOT_URLCONF.split('.')[0])
-}
-
-VOCABS_DEFAULT_PEFIX = os.path.basename(BASE_DIR)
-
-VOCABS_SETTINGS = {
-    'default_prefix': VOCABS_DEFAULT_PEFIX,
-    'default_ns': "http://www.vocabs/{}/".format(VOCABS_DEFAULT_PEFIX),
-    'default_lang': "eng"
-}
-
 APIS_COMPONENTS = []
 # APIS settings
 
@@ -169,6 +161,32 @@ APIS_ALTERNATE_NAMES = [
     'weitere Namensform'
   ]
 
+APIS_RELATIONS_FILTER_EXCLUDE = [
+    'uri',
+    'tempentityclass',
+    'user', '__id',
+    'source',
+    'label',
+    'temp_entity',
+    'collection__',
+    '_ptr',
+    'baseclass',
+    'id',
+    'written',
+    'relation_type__description',
+    'relation_type__parent_class',
+    'relation_type__status',
+    'relation_type__vocab_name',
+    'relation_type__name_reverse',
+    '__text',
+]
+
+APIS_RELATIONS = {
+    'PersonPlace': {
+        'exclude': ['name']
+    }
+}
+
 APIS_ENTITIES = {
     'Place': {'search': ['name'],
               'list_filters': [
@@ -186,20 +204,37 @@ APIS_ENTITIES = {
                                 ('profession', {'label': 'Profession'}),
                                 ('collection', {'label': 'Collection'})]
                },
-    'Institution': {'search': ['name'],
-                    'list_filters': [('name', {'method': 'wildcard_filter', 'label': 'Name'})]},
-    'Work': {'search': ['name'],
-             'list_filters': [
-                ('name', {'method': 'wildcard_filter', 'label': 'Name'}),
-                ('collection', {'label': 'Collection'}),
-            ]},
-    'Event': {'search': ['name'],
-              'list_filters': [('name', {'method': 'wildcard_filter', 'label': 'Name'})]},
+    'Institution': {
+        'search': ['name'],
+        'list_filters': [
+            ('name', {'method': 'wildcard_filter', 'label': 'Name'}),
+            ('collection', {'label': 'Collection'}),
+            ('kind', {'label': 'Type'})
+        ]
+    },
+    'Work': {
+        'search': ['name'],
+        'list_filters': [
+            ('name', {'method': 'wildcard_filter', 'label': 'Name'}),
+            ('collection', {'label': 'Collection'}),
+            ('kind', {'label': 'Type'}),
+        ]
+    },
+    'Event': {
+        'search': ['name'],
+        'list_filters': [
+            ('name', {'method': 'wildcard_filter', 'label': 'Name'}),
+            ('collection', {'label': 'Collection'}),
+            ('kind', {'label': 'Type'}),
+            # ('start_date', {'label': 'Start Date'}),
+            # ('end_date', {'label': 'End Date'}),
+        ]
+    }
 }
 
 
-APIS_LIST_VIEWS_ALLOWED = True
-APIS_DETAIL_VIEWS_ALLOWED = True
+APIS_LIST_VIEWS_ALLOWED = False
+APIS_DETAIL_VIEWS_ALLOWED = False
 
 APIS_LIST_VIEW_TEMPLATE = "browsing/generic_list.html"
 APIS_DELETE_VIEW_TEMPLATE = "webpage/confirm_delete.html"
@@ -246,12 +281,11 @@ PROJECTS = {
             'resolver_place': 'register.html?key=',
             'base_url': 'https://schnitzler-briefe.acdh.oeaw.ac.at'
         },
-    'CPAS':
-        {
-            'abbr': 'CPAS',
-            'title': 'A. ist manchmal wie ein kleines Kind',
-            'resolver_person': 'register.html?key=',
-            'resolver_place': 'register.html?key=',
-            'base_url': 'https://schnitzler-kino.acdh.oeaw.ac.at'
-        },
 }
+
+APIS_IIIF_WORK_KIND = 'IIIF'
+APIS_IIIF_ENT_IIIF_REL = "has iiif image"
+APIS_IIIF_SERVER = "https://iiif.acdh.oeaw.ac.at/"
+# APIS_OPENSEADRAGON_CSS = "https://teic.github.io/CETEIcean/css/CETEIcean.css"
+APIS_OSD_JS = "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.0/openseadragon.min.js"
+APIS_OSD_IMG_PREFIX = "https://cdnjs.cloudflare.com/ajax/libs/openseadragon/2.4.0/images/"

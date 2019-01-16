@@ -38,7 +38,7 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
     <!-- End Cookie Consent plugin -->
     <!-- Matomo -->
-      <script type="text/javascript">
+      <!-- <script type="text/javascript">
         var _paq = _paq || [];
         /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
         _paq.push(['trackPageView']);
@@ -50,7 +50,7 @@
           var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
           g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
         })();
-      </script>
+      </script> -->
     <!-- End Matomo Code -->
     {% block scriptHeader %}
     {% endblock %}
@@ -71,7 +71,8 @@
                                 <span class="caret"/>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{% url 'webpage:staticpage' template='about' %}">About project</a>
+                                <a class="dropdown-item" href="{% url 'webpage:staticpage' template='about' %}">About</a>
+                                <a class="dropdown-item" href="{% url 'webpage:staticpage' template='team' %}">Team</a>
                                 <a class="dropdown-item" href="{% url 'webpage:staticpage' template='imprint' %}">Imprint | Impressum</a>
                             </div>
                         </li>
@@ -86,6 +87,19 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">APIS Visualisations
+                                <span class="caret"/>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{% url 'apis:apis_vis:heatmap_view' %}">Heatmap</a>
+                                <!-- <a class="dropdown-item" href="{% url 'apis:apis_vis:avg_members_view' %}">Anzahl aller/neuer Mitglieder</a>
+                                <a class="dropdown-item" href="{% url 'apis:apis_vis:avgage_view' %}">Durchschnittsalter aller/neuer Mitglieder</a>
+                                <a class="dropdown-item" href="{% url 'apis:apis_vis:inst_range_view' %}">Kommissionen</a> -->
+                                <a class="dropdown-item" href="{% url 'apis:apis_entities:generic_network_viz' %}">Netzwerk</a>
+
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">APIS Relations
                                 <span class="caret"/>
                             </a>
@@ -95,17 +109,6 @@
                                 {% endfor %}
                             </div>
                         </li>
-                        {% if user.is_authenticated %}
-                            <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">TEI
-                                    <span class="caret"/>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <!-- <a class="dropdown-item" href="{% url 'teimporter:import_placelist' %}">Import Places</a> -->
-                                    <a class="dropdown-item" href="{% url 'teimporter:import_listperson' %}">Import ListPerson</a>
-                                </div>
-                            </li>
-                        {% endif %}
                     {% if user.is_authenticated %}
                     <li class="nav-item dropdown ml-auto">
                         <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -113,7 +116,12 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="nav-link" href="{% url 'webpage:user_logout' %}">Log-Out</a>
+                      <div class="form-check" style="padding-left: 20px">
+                        <input type="checkbox" class="form-check-input" id="check_edit_views" {% if  request.session.edit_views %}checked{% endif %}>
+                        <label class="form-check-label" for="ckeck_edit_views">Use edit views</label>
+                      </div>
                         </div>
+
                     </li>
                     {% else %}
                     <li class="nav-item dropdown ml-auto">
@@ -134,7 +142,7 @@
     <section class="main-content">
         {% if DEV_VERSION %}
         <div class="alert alert-danger" role="alert">
-            This is a DEVELOPMENT instance. Click <a href="https://veh.acdh-dev.oeaw.ac.at">here</a> for the Production version
+            This is a DEVELOPMENT instance. Click <a href="https://paas.acdh-dev.oeaw.ac.at">here</a> for the Production version
         </div>
         {% endif %}
         <div id="content">
@@ -148,13 +156,36 @@
                     <i class="far fa-comment"></i> CONTACT
                 </div>
                 <div class="row">
-                    <div class="col-md-2 pl-0">
-                        <a href="https://www.oeaw.ac.at/acdh/acdh-home/" target="_blank" rel="noopener" aria-label="ACDH">
-                            <img src="{% static 'webpage/img/acdh_logo.png' %}" alt="ACDH" title="Austrian Centre for Digital Humanities"/>
-                        </a>
+                    <div class="footer-widget col-lg-1 col-md-2 col-sm-2 col-xs-6 col-3">
+              <div class="textwidget custom-html-widget">
+                <a href="/"><img src="https://www.oeaw.ac.at/fileadmin/oeaw/institutstemplate/acdh/img/acdh_logo120h.png" class="image" alt="ACDH Logo" title="ACDH"></a>
+              </div>
+            </div><!-- .footer-widget -->
+            <div class="footer-widget col-lg-4 col-md-4 col-sm-6 col-9">
+              <div class="textwidget custom-html-widget">
+                <p>
+                    ACDH
+                  <br>
+                  Austrian Centre for Digital Humanities
+                  <br>
+                  Austrian Academy of Sciences
+                </p>
+                <p>
+                  Sonnenfelsgasse 19
+                  <br>
+                  1020 Vienna
+                </p>
+                <p>
+                  <br>
+                  E: <a href="mailto:acdh@oeaw.ac.at">ACDH@oeaw.ac.at</a>
+                </p>
+              </div>
+            </div>
+                    <div class="footer-widget col-md-3">
+
                     </div>
-                    <div class="col-md-2 ml-auto">
-                        <img src="{% static 'webpage/img/partner_logo.png' %}" alt="Partner Logo" title="Partner Logo"/>
+                    <div class="footer-widget col-md-3">
+                        <img src="https://www.oeaw.ac.at/typo3conf/ext/oeaw_website/Resources/Public/Images/oeaw_logo_446x192.png" alt="OeAW" title="OeAW"/>
                     </div>
                 </div>
             </div>
@@ -182,6 +213,22 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 $.apScrollTop({'onInit': function(evt) {console.log('apScrollTop: init');}});
+		                    $('#check_edit_views').on('change', function(){
+                  var edit_views = $('#check_edit_views').prop('checked');
+					    $.ajax({
+                    url: "{% url 'webpage:set_user_settings' %}",
+                    data: {'edit_views': edit_views},
+		    dataType: 'json',
+                    success: function(data){
+                      if (data.edit_views) {
+                        $('#check_edit_views').prop('checked', true)
+                      } else {
+                        $('#check_edit_views').prop('checked', false)
+                      }
+                    }
+                  })
+                });
+
             });
         </script>
         {% endblock %}

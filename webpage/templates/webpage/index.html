@@ -4,49 +4,27 @@
 {% load webpage_extras %}
 {% block content %}
 
-        <div class="jumbotron" style="background-image: url({% static 'webpage/img/project_background.jpg' %}) ">
-            <div class="container">
-                <h1 style="text-align:center; color: #111;">{% projects_metadata 'title' %}</h1>
-                <h3 style="text-align:center; color: #111;">{% projects_metadata 'subtitle' %}</h3>
-                <h5 style="text-align:center; color: #111;">{% projects_metadata 'description' %}</h3>
-            </div>
-        </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h5 class="row-heading pb-2 mb-3 border-bottom"><i class="fas fa-paste"></i> Data-Count</h3>
-            </div>
-
-            {% create_object_count app='archiv' as models %}
-            {% for x in models %}
-                <div class="col-md-12  text-center">
-                    <div class="card flex-md-row mb-4 box-shadow">
-                        <div class="card-body">
-                            <h4 class="mb-0">{{x.name}}</h4>
-                            <h4 class="count">{{ x.count }}</h4>
-                            {% if x.link %}
-                                <a class="btn btn-main btn-outline-primary btn-sm" href="{{ x.link }}" role="button">View Details</a>
-                            {% endif %}
-                        </div>
-                    </div>
+<div class="jumbotron" style="min-height: 400px; padding:0; background-image: url({% static 'webpage/img/project_background.jpg' %})" title="Image (c) Maren Jeleff Photography">
+</div>
+<div class="container">
+        <div class="card card-index">
+            <div class="card-body">
+                <h1 class="text-center title-index">
+                {% projects_metadata 'title' %}
+                </h1>
+                <p class="text-center text-muted paragraph-index">
+                    {% projects_metadata 'subtitle' %}
+                </p>
+                <hr class="hr-index"/>
+                <p class="text-justify">
+                    {% projects_metadata 'description' %}
+		        </p>
+                <div class="text-right">
+                    <a href="/apis/entities/entity/person/list/" class="btn btn-lg btn-index pulse" class="pull-right">
+                    <b><i class="fa fa-angle-right"></i></b>&nbsp;&nbsp;explore
+                    </a>
                 </div>
-            {% endfor %}
             <hr />
-            {% create_object_count app='apis_entities' as models %}
-            {% for x in models %}
-                <div class="col-md-4  text-center">
-                    <div class="card flex-md-row mb-4 box-shadow">
-                        <div class="card-body">
-                            <h4 class="mb-0">{{x.name}}</h4>
-                            <h4 class="count">{{ x.count }}</h4>
-                            {% if x.link %}
-                                <a class="btn btn-main btn-outline-primary btn-sm" href="{{ x.link }}" role="button">View Details</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
         </div>
     </div>
 {% endblock %}
