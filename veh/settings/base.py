@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'guardian',
     'charts',
+    'teimporter',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap3"

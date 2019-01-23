@@ -1,4 +1,6 @@
 from django.conf import Settings
+from django.core.exceptions import MultipleObjectsReturned
+
 from apis_core.apis_entities.models import *
 from apis_core.apis_relations.models import *
 from apis_core.apis_labels.models import *
@@ -46,9 +48,14 @@ def dict_to_pers(pers_dict, entity=None):
             entity.profession.add(prof)
 
     if pers_dict['birth_place']:
-        pl, _ = Place.objects.get_or_create(
-            name=pers_dict['birth_place']
-        )
+        try:
+            pl, _ = Place.objects.get_or_create(
+                name=pers_dict['birth_place']
+            )
+        except MultipleObjectsReturned:
+            pl, _ = Place.objects.get_or_create(
+                name="potential_duplicate__{}".format(pers_dict['birth_place'])
+            )
         rel_type, _ = PersonPlaceRelation.objects.get_or_create(
             name="born in", name_reverse="place of birth"
         )
@@ -66,9 +73,14 @@ def dict_to_pers(pers_dict, entity=None):
         pers_pla.save()
     pers_pla = None
     if pers_dict['death_place']:
-        pl, _ = Place.objects.get_or_create(
-            name=pers_dict['death_place']
-        )
+        try:
+            pl, _ = Place.objects.get_or_create(
+                name=pers_dict['death_place']
+            )
+        except MultipleObjectsReturned:
+            pl, _ = Place.objects.get_or_create(
+                name="potential_duplicate__{}".format(pers_dict['death_place'])
+            )
         rel_type, _ = PersonPlaceRelation.objects.get_or_create(
             name="died in", name_reverse="place of death"
         )
