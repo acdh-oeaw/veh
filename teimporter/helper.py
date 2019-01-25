@@ -40,7 +40,10 @@ def dict_to_pers(pers_dict, entity=None):
         entity.rolename = pers_dict['rolename']
 
     if pers_dict['namelink']:
-        entity.namelink = pers_dict['namelink']
+        ent_titl, _ = Title.obejcts.get_or_create(
+            name=pers_dict['namelink']
+        )
+        entity.title.add(ent_titl)
 
     if pers_dict['occupation']:
         for x in pers_dict['occupation']:

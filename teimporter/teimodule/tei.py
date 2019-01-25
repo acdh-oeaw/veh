@@ -1,5 +1,6 @@
-import lxml.etree as ET
 import hashlib
+import pandas as pd
+import lxml.etree as ET
 
 
 tei_document = """
@@ -365,9 +366,15 @@ class TeiPersonList(TeiReader):
             person['alt_names'] = []
             for name in names:
                 altname = {}
-                altname['label'] = ", ".join(
-                    [x.xpath('.//text()', namespaces=self.ns_tei)[0] for x in name]
-                )
+                if name.text:
+                    altname['label'] = name.text
+                else:
+                    try:
+                        altname['label'] = ", ".join(
+                            [x.xpath('.//text()', namespaces=self.ns_tei)[0] for x in name]
+                        )
+                    except Exception as e:
+                        altname['label'] = "ERROR"
                 try:
                     altname['type'] = name.xpath('./@subtype')[0]
                 except IndexError:
@@ -456,3 +463,16 @@ class TeiPersonList(TeiReader):
         for x in persons:
             person_dicts.append(self.person2dict(x))
         return person_dicts
+
+    def listpers_to_df(self):
+        """ returns a dataframe derived from list person """
+        df = pd.DataFrame(self.process_listperson())
+        try:
+            df['gnd'] = dict(eval(str(list(df['idnos'].apply(pd.Series)[1])[0])))['path']
+        except Exception as e:
+            print(e)
+        try:
+            df['id'] = dict(eval(str(list(df['idnos'].apply(pd.Series)[0])[0])))['path']
+        except Exception as e:
+            print(e)
+        return df
