@@ -1,7 +1,7 @@
 acdh-django-charts==0.5.0
 apis-core==0.9.3
 backcall==0.1.0
-bleach==3.0.2
+bleach==3.3.0
 calmjs==3.3.1
 calmjs.bower==1.0.2
 calmjs.parse==1.1.3
